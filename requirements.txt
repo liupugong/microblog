@@ -1,0 +1,12 @@
+flask
+flask-login
+flask-mail
+sqlalchemy
+flask-sqlalchemy
+sqlalchemy-migrate
+flask-whooshalchemy
+flask-wtf
+flask-babel
+flup
+# Sphinx==1.2.3
+Fabric==1.10.1

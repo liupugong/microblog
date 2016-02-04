@@ -5,7 +5,7 @@ import os
 import datetime
 
 ####################
-# ElE deploy code
+# deploy code
 ####################
 from fabric.api import (
     env,
@@ -33,12 +33,11 @@ env.hosts=['root@192.168.1.204',] #ssh要用到的参数
 
 # platform
 ROOT_DIR_V2 = os.path.dirname(os.path.abspath(__file__))
-DEPLOY_DIR_V2 = "{}/build/html".format(ROOT_DIR_V2)
+DEPLOY_DIR_V2 = "{}/".format(ROOT_DIR_V2)
 REMOTE_VERSION_V2 = datetime.datetime.now().strftime("%Y%m%d%H%M%S")
-REMOTE_DIR_V2 = '/data/www/openapi.eleme.io_v2/{}'.format(REMOTE_VERSION_V2)
+REMOTE_DIR_V2 = '/data/www/pydemo/{}'.format(REMOTE_VERSION_V2)
 REMOTE_USER_V2 = 'www-data'
 #  = 'rsync_exclude.txt'
-PDF_FILEPATH = '_build/pdf/openapi.pdf'
 
 
 ####################
@@ -66,7 +65,7 @@ def build():
     with lcd(PROJECT_PATH):
         local('rm -rf ./build/')
         local('make html')
-        local('make pdf')
+        # local('make pdf')
 
 
 @task
@@ -75,13 +74,11 @@ def deploy():
     sudo("chown {0} -R {1}".format(env.user, REMOTE_DIR_V2))
     local(
         "rsync -az --progress --force --delete --delay-updates "
-        "--exclude-from={0} {4} {1}/ {3}:{2}/".format(
-            #os.path.join(ROOT_DIR_V2, RSYNC_EXCLUDE_V2),
+        "--exclude-from={0} {1}/ {3}:{2}/".format(
             ROOT_DIR_V2,
             DEPLOY_DIR_V2,
             REMOTE_DIR_V2,
             env.host_string,
-            PDF_FILEPATH,
         )
     )
     sudo("chown {0} -R {1}".format(REMOTE_USER_V2, REMOTE_DIR_V2))
