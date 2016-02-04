@@ -8,10 +8,10 @@ import sys
 
 
 try:
-    dbhost = "172.16.10.24"
-    dbuser = "eleme"
-    dbpass = "eleMe"
-    dbname = "hydros"
+    dbhost = "127.0.0.1"
+    dbuser = "demo"
+    dbpass = "Password@1"
+    dbname = "sakila"
 
     con = mdb.connect(dbhost, dbuser,dbpass,dbname)
     

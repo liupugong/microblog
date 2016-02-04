@@ -3,4 +3,7 @@
 app.db
 search.db
 flask
+.DS_Store
+hs_*.log
+*.sublime-*
 
